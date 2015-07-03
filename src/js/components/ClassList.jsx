@@ -1,43 +1,20 @@
-let List = mui.List;
-let ListItem = mui.ListItem;
-let Page = require('./Page.jsx');
+let { MenuItem } = mui;
+let PageWithNav = require('./PageWithNav.jsx');
+
+let menuItems = [
+  {text: 'This Month\'s Classes', route: 'this-months-classes'},
+  {type: MenuItem.Types.SUBHEADER, text: 'Tags'},
+  {text: 'JavaScript', route: 'javascript'},
+  {text: 'Spring Boot', route: 'spring-boot'}
+];
 
 let ClassList = React.createClass({
-  mixins: [FluxMixin, StoreWatchMixin("ClassStore")],
-
-  componentWillMount() {
-    ThemeManager.setPalette({
-      accent1Color: Colors.deepOrange500
-    });
-  },
-
-  getInitialState: function() {
-    return {};
-  },
-
-  getStateFromFlux: function() {
-    let flux = this.getFlux();
-    return {
-      classData: flux.store("ClassStore").getState()
-    };
-  },
-
+  mixins: [
+    FluxMixin
+  ],
   render: function() {
-    let classData = this.state.classData.classes;
-    let classes = Object.keys(classData).map(function(id){
-      return (
-        <ListItem key={id}>
-          {classData[id].title} - {classData[id].description}
-        </ListItem>
-      )
-    });
-
     return (
-      <Page title="Available Classes">
-        <List>
-          {classes}
-        </List>
-      </Page>
+      <PageWithNav title="Available Classes" menuItems={menuItems} />
     );
   }
 });

@@ -9,19 +9,17 @@ class Page extends React.Component {
 
     let header_style = {
       marginBottom: '12px',
-      paddingTop: '16px'
-    };
-
-    let paper_style = {
-      padding: '10px'
+      paddingTop: '16px',
+      fontSize: '24px',
+      fontWeight: 400,
+      letterSpacing: '0',
+      lineHeight: '32px'
     };
 
     return (
       <div id="main-content" style={styles}>
-        <Paper zDepth={1} style={paper_style}>
-          <h1 style={header_style}>{this.props.title}</h1>
-          {this.props.children}
-        </Paper>
+        <h2 style={header_style}>{this.props.title}</h2>
+        {this.props.children}
       </div>
     );
   }

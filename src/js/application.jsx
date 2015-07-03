@@ -1,5 +1,6 @@
 (function () {
   let _ = require('lodash');
+  let moment = require('moment');
   let React = require('react/addons');
   let Router = require('react-router');
   let Fluxxor = require('fluxxor');
@@ -11,6 +12,7 @@
   let Colors = mui.Styles.Colors;
 
   window._ = _;
+  window.moment = moment;
   window.React = React;
   window.Router = Router;
   window.Fluxxor = Fluxxor;

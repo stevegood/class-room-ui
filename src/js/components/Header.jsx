@@ -3,7 +3,7 @@ let LeftNav = mui.LeftNav;
 
 let menuItems = [
   {text: 'Home', route: 'home'},
-  {text: 'Class List', route: 'class-list'}
+  {text: 'Classes', route: 'class-list'}
 ];
 
 class Header extends React.Component {
