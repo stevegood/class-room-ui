@@ -1,5 +1,7 @@
 (function () {
+  let _ = require('lodash');
   let React = require('react/addons');
+  let Router = require('react-router');
   let Fluxxor = require('fluxxor');
   let FluxMixin = Fluxxor.FluxMixin(React);
   let StoreWatchMixin = Fluxxor.StoreWatchMixin;
@@ -7,8 +9,10 @@
   let mui = require('material-ui');
   let ThemeManager = new mui.Styles.ThemeManager();
   let Colors = mui.Styles.Colors;
-  //Needed for React Developer Tools
+
+  window._ = _;
   window.React = React;
+  window.Router = Router;
   window.Fluxxor = Fluxxor;
   window.FluxMixin = FluxMixin;
   window.StoreWatchMixin = StoreWatchMixin;
@@ -31,16 +35,15 @@
 
   ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
-  let Main = require('./components/main.jsx'); // Our custom react component
-
-  //Needed for onTouchTap
-  //Can go away when react 1.0 release
-  //Check this repo:
-  //https://github.com/zilverline/react-tap-event-plugin
   injectTapEventPlugin();
 
-  // Render the main app react component into the document body.
-  // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
-  React.render(<Main flux={flux} />, document.body);
+
+  let routes = require('./routes.jsx');
+  let router = Router.create({routes: routes});
+
+
+  router.run(function(Handler) {
+    React.render(<Handler flux={flux}/>, document.body);
+  });
 
 })();

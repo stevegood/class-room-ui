@@ -1,45 +1,75 @@
 let AppBar = mui.AppBar;
 let LeftNav = mui.LeftNav;
 
-let Header = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
+let menuItems = [
+  {text: 'Home', route: 'home'},
+  {text: 'Class List', route: 'class-list'}
+];
+
+class Header extends React.Component {
+  constructor() {
+    super();
+    this.toggle = this.toggle.bind(this);
+    this._getSelectedIndex = this._getSelectedIndex.bind(this);
+    this._onLeftNavChange = this._onLeftNavChange.bind(this);
+  }
 
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  },
+  }
 
   componentWillMount() {
     ThemeManager.setPalette({
       accent1Color: Colors.deepOrange500
     });
-  },
+  }
 
-  render: function() {
+  render() {
     let styles = {
       position: 'fixed'
     }
 
-    let menu_items = [
-      {text: 'Home'},
-      {text: 'New Class'}
-    ];
-
     return (
       <div>
-        <LeftNav docked={false} menuItems={menu_items} ref="leftNav" />
-        <AppBar title="Class Room Organizer" style={styles}
-                onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap} />
+        <LeftNav
+          docked={false}
+          menuItems={menuItems}
+          isInitiallyOpen={false}
+          selectedIndex={this._getSelectedIndex()}
+          onChange={this._onLeftNavChange}
+          ref="leftNav" />
+        <AppBar title={this.props.title} style={styles}
+                onLeftIconButtonTouchTap={this.toggle} />
       </div>
     );
-  },
+  }
 
-  _onLeftIconButtonTouchTap: function(e) {
+  toggle() {
     this.refs.leftNav.toggle();
   }
-});
+
+  _getSelectedIndex() {
+    let currentItem;
+
+    for (let i = menuItems.length - 1; i >= 0; i--) {
+      currentItem = menuItems[i];
+      if (currentItem.route && this.context.router.isActive(currentItem.route)) return i;
+    }
+  }
+
+  _onLeftNavChange(e, key, payload) {
+    this.context.router.transitionTo(payload.route);
+  }
+};
+
+Header.contextTypes = {
+  router: React.PropTypes.func
+};
+
+Header.childContextTypes = {
+  muiTheme: React.PropTypes.object
+};
 
 module.exports = Header;
