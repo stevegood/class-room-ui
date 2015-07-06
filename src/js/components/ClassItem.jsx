@@ -6,7 +6,7 @@ let ClassItem = React.createClass({
     description: React.PropTypes.string.isRequired,
     created_at: React.PropTypes.any,
     updated_at: React.PropTypes.any,
-    id: React.PropTypes.number
+    id: React.PropTypes.number.isRequired
   },
 
   mixins: [React.addons.LinkedStateMixin],

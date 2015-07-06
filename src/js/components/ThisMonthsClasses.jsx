@@ -1,6 +1,5 @@
 let {
   List,
-  MenuItem,
   Paper
 } = mui;
 

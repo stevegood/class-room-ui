@@ -6,10 +6,12 @@ let Main = require('./components/Main.jsx');
 let Home = require('./components/Home.jsx');
 let ClassList = require('./components/ClassList.jsx');
 let ThisMonthsClasses = require('./components/ThisMonthsClasses.jsx');
+let TaggedClasses = require('./components/TaggedClasses.jsx');
 
 let routes = (
   <Route handler={Main} name="home" path="/">
     <Route handler={ClassList} name="class-list" path="classes">
+      <Route handler={TaggedClasses} name="tagged-classes" path="tag/:tag" />
       <Route handler={ThisMonthsClasses} name="this-months-classes"/>
       <Redirect from="/classes" to="this-months-classes"/>
     </Route>

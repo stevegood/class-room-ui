@@ -1,6 +1,9 @@
 let {
   MenuItem
 } = mui;
+
+let Link = Router.Link;
+
 let PageWithNav = require('./PageWithNav.jsx');
 
 let menuItems = [
@@ -12,10 +15,12 @@ let menuItems = [
     text: 'Tags'
   }, {
     text: 'JavaScript',
-    route: 'javascript'
+    route: 'tagged-classes',
+    params: {tag:'javascript'}
   }, {
     text: 'Spring Boot',
-    route: 'spring-boot'
+    route: 'tagged-classes',
+    params: {tag: 'spring-boot'}
   }
 ];
 

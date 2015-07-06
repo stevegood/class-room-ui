@@ -79,7 +79,8 @@ let PageWithNav = React.createClass({
         </div>
 
         <div style={styles.secondaryNav}>
-          <Menu menuItems={this.props.menuItems} onItemTap={this._onMenuItemClick} ref="menuItems" selectedIndex={this._getSelectedIndex()} zDepth={0}/>
+          <Menu menuItems={this.props.menuItems} onItemTap={this._onMenuItemClick}
+            ref="menuItems" selectedIndex={this._getSelectedIndex()} zDepth={0}/>
         </div>
       </div>
     );
@@ -97,7 +98,7 @@ let PageWithNav = React.createClass({
   },
 
   _onMenuItemClick(e, index, item) {
-    this.context.router.transitionTo(item.route);
+    this.context.router.transitionTo(item.route, item.params, item.query);
   }
 
 });

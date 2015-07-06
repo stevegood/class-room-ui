@@ -37,8 +37,12 @@ class Header extends React.Component {
     }
     return (
       <div>
-        <LeftNav docked={false} isInitiallyOpen={false} menuItems={menuItems} onChange={this._onLeftNavChange} ref="leftNav" selectedIndex={this._getSelectedIndex()}/>
-        <AppBar onLeftIconButtonTouchTap={this.toggle} style={styles} title={this.props.title}/>
+        <LeftNav docked={false} isInitiallyOpen={false} menuItems={menuItems}
+          onChange={this._onLeftNavChange} ref="leftNav"
+          selectedIndex={this._getSelectedIndex()}/>
+          
+        <AppBar onLeftIconButtonTouchTap={this.toggle} style={styles}
+          title={this.props.title}/>
       </div>
     );
   }
