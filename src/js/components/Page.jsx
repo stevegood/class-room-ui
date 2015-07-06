@@ -4,7 +4,7 @@ let Paper = mui.Paper;
 class Page extends React.Component {
   render() {
     let styles = {
-      padding: '75px 10px 10px 10px',
+      padding: '75px 10px 10px 10px'
     };
 
     let header_style = {

@@ -1,17 +1,7 @@
-let constants = require('../constants/ClassConstants');
-module.exports = {
-  addClass: function(title, description) {
-    this.dispatch(constants.ADD_CLASS, {
-      title: title,
-      description: description
-    });
-  },
+let TodoActions = Reflux.createActions([
+  'addClass',
+  'removeClass',
+  'updateClass'
+]);
 
-  removeClass: function(_class) {
-    this.dispatch(constants.REMOVE_CLASS, _class);
-  },
-
-  updateClass: function(_class) {
-    this.dispatch(constants.UPDATE_CLASS, _class);
-  }
-}
+module.exports = TodoActions;

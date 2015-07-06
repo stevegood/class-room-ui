@@ -16,7 +16,7 @@ class Main extends React.Component {
   render() {
     return (
       <AppCanvas>
-        <Header title='Class Room Organizer' />
+        <Header title='Class Room Organizer'/>
         <RouteHandler {...this.props}/>
       </AppCanvas>
     );

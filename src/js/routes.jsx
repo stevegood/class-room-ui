@@ -9,12 +9,12 @@ let ThisMonthsClasses = require('./components/ThisMonthsClasses.jsx');
 
 let routes = (
   <Route handler={Main} name="home" path="/">
-    <Route path="classes" name="class-list" handler={ClassList}>
-      <Route name="this-months-classes" handler={ThisMonthsClasses} />
-      <Redirect from="/classes" to="this-months-classes" />
+    <Route handler={ClassList} name="class-list" path="classes">
+      <Route handler={ThisMonthsClasses} name="this-months-classes"/>
+      <Redirect from="/classes" to="this-months-classes"/>
     </Route>
 
-    <DefaultRoute handler={Home} />
+    <DefaultRoute handler={Home}/>
   </Route>
 );
 

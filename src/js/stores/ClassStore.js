@@ -1,59 +1,62 @@
-let constants = require('../constants/ClassConstants');
+let classCounter = 0,
+    localStorageKey = 'classes';
 
-let ClassStore = Fluxxor.createStore({
-  initialize: function() {
-    this.classId = 1;
-    this.classes = {};
+function getClassById(list, id) {
+  return _.find(list, function(item){
+    return item.id === id;
+  });
+}
 
-    this.classes[1] = {
-      id: 1,
-      title: 'This is a test',
-      description: 'This is just a test.'
-    };
-
-    this.bindActions(
-      constants.ADD_CLASS,
-      constants.READ_CLASSES,
-      constants.REMOVE_CLASS,
-      constants.UPDATE_CLASS
-    );
+let ClassStore = Reflux.createStore({
+  listenables: [ClassActions],
+  onAddClass: function(title, description) {
+    let now = new Date();
+    this.updateList([{
+      id: classCounter++,
+      created_at: now,
+      updated_at: now,
+      title: title,
+      description: description
+    }].concat(this.list));
   },
 
-  onAddClass: function(payload) {
-    let id = this._nextClassId();
-    let _class = {
-      id: id,
-      title: payload.title,
-      description: payload.description
-    };
+  onUpdateClass: function(id, title, description) {
+    let _class = getClassById(id)
+    if (!_class) {
+      return;
+    }
 
-    this.classes[id] = _class;
-    this.emit("change");
+    _class.title = title;
+    _class.description = description;
+    _class.updated_at = new Date();
+
+    this.updateList(this.list);
   },
 
-  onReadClasses: function() {
-    // TODO: I have no idea what to do here...
+  onRemoveClass: function(id) {
+    this.updateList(_.filter(this.list, function(item){
+      return item.id !== id;
+    }));
   },
 
-  onRemoveClass: function(payload) {
-    delete this.classes[payload.id];
-    this.emit("change");
-  },
-
-  onUpdateClass: function(payload) {
-    this.classes[payload.id] = payload;
-    this.emit("change");
-  },
-
-  getState: function() {
-    return {
-      classes: this.classes
-    };
-  },
-
-  _nextClassId: function() {
-    return ++this.classId;
+  getInitialState: function() {
+    let loadedList = localStorage.getItem(localStorageKey);
+    if (!loadedList) {
+      let now = new Date();
+      this.list = [{
+        id: classCounter++,
+        created_at: now,
+        updated_at: now,
+        title: 'Sample Class',
+        description: 'This is a sample class that can be used to get you started'
+      }];
+    } else {
+      this.list = _.map(JSON.parse(loadedList), function(item){
+        item.id = classCounter++;
+        return item;
+      });
+    }
+    return {list: this.list};
   }
 });
-
 module.exports = ClassStore;

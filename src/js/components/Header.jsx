@@ -2,8 +2,13 @@ let AppBar = mui.AppBar;
 let LeftNav = mui.LeftNav;
 
 let menuItems = [
-  {text: 'Home', route: 'home'},
-  {text: 'Classes', route: 'class-list'}
+  {
+    text: 'Home',
+    route: 'home'
+  }, {
+    text: 'Classes',
+    route: 'class-list'
+  }
 ];
 
 class Header extends React.Component {
@@ -30,18 +35,10 @@ class Header extends React.Component {
     let styles = {
       position: 'fixed'
     }
-
     return (
       <div>
-        <LeftNav
-          docked={false}
-          menuItems={menuItems}
-          isInitiallyOpen={false}
-          selectedIndex={this._getSelectedIndex()}
-          onChange={this._onLeftNavChange}
-          ref="leftNav" />
-        <AppBar title={this.props.title} style={styles}
-                onLeftIconButtonTouchTap={this.toggle} />
+        <LeftNav docked={false} isInitiallyOpen={false} menuItems={menuItems} onChange={this._onLeftNavChange} ref="leftNav" selectedIndex={this._getSelectedIndex()}/>
+        <AppBar onLeftIconButtonTouchTap={this.toggle} style={styles} title={this.props.title}/>
       </div>
     );
   }
@@ -55,7 +52,8 @@ class Header extends React.Component {
 
     for (let i = menuItems.length - 1; i >= 0; i--) {
       currentItem = menuItems[i];
-      if (currentItem.route && this.context.router.isActive(currentItem.route)) return i;
+      if (currentItem.route && this.context.router.isActive(currentItem.route))
+        return i;
     }
   }
 

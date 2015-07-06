@@ -4,21 +4,17 @@ body, h1, h2, h3, h4, h5, h6 {
 html {
   font-family: 'Roboto', sans-serif;
 }
-
 body {
   font-size: 13px;
   line-height: 20px;
 }
-
 a {
   color: #ff4081;
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
-
 h2 {
   font-size: 24px;
   line-height: 32px;

@@ -1,10 +1,13 @@
-let { List, ListItem, MenuItem, Paper } = mui;
+let {
+  List,
+  MenuItem,
+  Paper
+} = mui;
+
+let ClassItem = require('./ClassItem.jsx');
 
 let ThisMonthsClasses = React.createClass({
-  mixins: [
-    FluxMixin,
-    StoreWatchMixin("ClassStore")
-  ],
+  mixins: [Reflux.connect(ClassStore, this)],
 
   componentWillMount() {
     ThemeManager.setPalette({
@@ -12,24 +15,12 @@ let ThisMonthsClasses = React.createClass({
     });
   },
 
-  getInitialState: function() {
-    return {};
-  },
-
-  getStateFromFlux: function() {
-    let flux = this.getFlux();
-    return {
-      classData: flux.store("ClassStore").getState()
-    };
-  },
+  getInitialState: function() {},
 
   render: function() {
-    let classData = this.state.classData.classes;
-    let classes = Object.keys(classData).map(function(id){
+    let classes = this.state.list.map(function(_class) {
       return (
-        <ListItem key={id}>
-          {classData[id].title} - {classData[id].description}
-        </ListItem>
+        <ClassItem {..._class} key={_class.id}/>
       )
     });
 
