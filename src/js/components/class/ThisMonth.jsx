@@ -3,7 +3,7 @@ let {
   Paper
 } = mui;
 
-let ClassItem = require('./ClassItem.jsx');
+let Item = require('./Item.jsx');
 
 let ThisMonthsClasses = React.createClass({
   mixins: [Reflux.connect(ClassStore, this)],
@@ -19,7 +19,7 @@ let ThisMonthsClasses = React.createClass({
   render: function() {
     let classes = this.state.list.map(function(_class) {
       return (
-        <ClassItem {..._class} key={_class.id}/>
+        <Item {..._class} key={_class.id}/>
       )
     });
 

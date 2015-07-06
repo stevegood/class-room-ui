@@ -4,22 +4,22 @@ let {
 
 let Link = Router.Link;
 
-let PageWithNav = require('./PageWithNav.jsx');
+let PageWithNav = require('../PageWithNav.jsx');
 
 let menuItems = [
   {
-    text: 'This Month\'s Classes',
-    route: 'this-months-classes'
+    text: 'Classes this Month',
+    route: 'classes-this-month'
   }, {
     type: MenuItem.Types.SUBHEADER,
     text: 'Tags'
   }, {
     text: 'JavaScript',
-    route: 'tagged-classes',
+    route: 'classes-with-tag',
     params: {tag:'javascript'}
   }, {
     text: 'Spring Boot',
-    route: 'tagged-classes',
+    route: 'classes-with-tag',
     params: {tag: 'spring-boot'}
   }
 ];

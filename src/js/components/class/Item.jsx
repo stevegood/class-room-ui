@@ -1,6 +1,6 @@
 let ListItem = mui.ListItem;
 
-let ClassItem = React.createClass({
+let Item = React.createClass({
   propTypes: {
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
@@ -24,4 +24,4 @@ let ClassItem = React.createClass({
   }
 });
 
-module.exports = ClassItem;
+module.exports = Item;

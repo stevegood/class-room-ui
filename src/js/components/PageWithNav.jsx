@@ -19,7 +19,7 @@ let {
 let PageWithNav = React.createClass({
 
   mixins: [
-    StyleResizable, StylePropable
+    StyleResizable, StylePropable, Router.State
   ],
 
   contextTypes: {
@@ -92,8 +92,14 @@ let PageWithNav = React.createClass({
 
     for (let i = menuItems.length - 1; i >= 0; i--) {
       currentItem = menuItems[i];
-      if (currentItem.route && this.context.router.isActive(currentItem.route))
-        return i;
+      if (currentItem.route) {
+        let hasParams = currentItem.params !== undefined;
+        let paramsAreEqual = _.isEqual(currentItem.params, this.getParams());
+        let itemIsActive = this.context.router.isActive(currentItem.route);
+        if ((hasParams && paramsAreEqual) || (!hasParams && itemIsActive)){
+          return i;
+        }
+      }
     }
   },
 

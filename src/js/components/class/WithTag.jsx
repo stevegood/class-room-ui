@@ -3,7 +3,7 @@ let {
   Paper
 } = mui;
 
-let ClassItem = require('./ClassItem.jsx');
+let Item = require('./Item.jsx');
 
 let TaggedClasses = React.createClass({
   render: function() {
